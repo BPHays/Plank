@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -22,25 +22,34 @@
  * SOFTWARE.
  */
 
+#ifndef INCLUDE_PLAYER_H_
+#define INCLUDE_PLAYER_H_
+
 #include <memory>
+#include <optional>
 #include <string>
 
-#include "include/player.h"
+#include "./machine_state.h"
 
-Player::Player(std::string name) : name(name), current_state(nullptr) {}
+class Player {
+ private:
+  /* Member variables */
+  std::string name;
+  std::shared_ptr<const MachineState> current_state;
 
-/* Getter for the player's name */
-auto Player::get_name(void) const -> const std::string & { return name; }
+  // TODO(brian) add network connection etc, here
 
-/* Getter for the player's current state */
-auto Player::get_state(void) const -> std::shared_ptr<const MachineState> {
-  return current_state;
-}
+ public:
+  /* Constructors */
+  explicit Player(std::string name);
 
-/* Update the player state, called from the game engine */
-void Player::update_state(std::shared_ptr<const MachineState> state) {
-  current_state = state;
-}
+  /* Const member functions */
+  auto get_name(void) const -> const std::string &;
+  auto playing(void) const -> bool;
+  auto get_state(void) const -> std::shared_ptr<const MachineState>;
 
-/* True if the player is in some game state */
-auto Player::playing(void) const -> bool { return current_state != nullptr; }
+  /* Non-const member functions */
+  void update_state(std::shared_ptr<const MachineState> state);
+};
+
+#endif  // INCLUDE_PLAYER_H_

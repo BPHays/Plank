@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -22,25 +22,31 @@
  * SOFTWARE.
  */
 
+#ifndef INCLUDE_MACHINE_STATE_H_
+#define INCLUDE_MACHINE_STATE_H_
+
 #include <memory>
-#include <string>
+#include <vector>
 
-#include "include/player.h"
+class MachineState;
+class Transition;
+class Player;
 
-Player::Player(std::string name) : name(name), current_state(nullptr) {}
+#include "./game_state.h"
+#include "./player.h"
+#include "./transition.h"
 
-/* Getter for the player's name */
-auto Player::get_name(void) const -> const std::string & { return name; }
+class MachineState {
+ private:
+  std::vector<std::shared_ptr<const Transition>> transitions;
 
-/* Getter for the player's current state */
-auto Player::get_state(void) const -> std::shared_ptr<const MachineState> {
-  return current_state;
-}
+ public:
+  auto get_available_transitions([[maybe_unused]] Player p,
+                                 [[maybe_unused]] const GameState &g) const
+      -> std::vector<std::shared_ptr<const Transition>>;
 
-/* Update the player state, called from the game engine */
-void Player::update_state(std::shared_ptr<const MachineState> state) {
-  current_state = state;
-}
+  void set_transitions(
+      std::vector<std::shared_ptr<const Transition>> transitions);
+};
 
-/* True if the player is in some game state */
-auto Player::playing(void) const -> bool { return current_state != nullptr; }
+#endif  // INCLUDE_MACHINE_STATE_H_
