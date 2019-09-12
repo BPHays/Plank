@@ -28,7 +28,6 @@
 #include <vector>
 
 #include "include/engine.h"
-#include "include/machine.h"
 #include "include/machine_state.h"
 #include "include/transition.h"
 
@@ -58,7 +57,7 @@ int main(void) {
   }
   the_state->set_transitions(ts);
 
-  std::vector<Player> players = {{"Brian"}};
+  std::vector<Player> players = {Player{"Brian"}};
 
   Engine eng(transitions, {the_state}, players, {}, the_state);
   eng.run();
