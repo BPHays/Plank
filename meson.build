@@ -5,6 +5,21 @@ project('Plank', 'cpp',
 run_target('lint',
   command : ['cpplint', '--recursive', '--exclude', 'build/*', '.'])
 
+run_target('format',
+  command : [
+    'clang-format',
+    '-i',
+    '--verbose',
+    'engine.cpp',
+    'transition.cpp',
+    'main.cpp',
+    'player.cpp',
+    'machine_state.cpp',
+    'include/engine.h',
+    'include/transition.h',
+    'include/player.h',
+    'include/machine_state.h'])
+
 executable('Plank',
            'engine.cpp',
            'transition.cpp',
