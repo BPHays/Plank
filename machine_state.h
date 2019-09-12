@@ -1,20 +1,26 @@
 #ifndef MACHINE_STATE_H
 #define MACHINE_STATE_H
 
+#include <memory>
 #include <vector>
+
+class MachineState;
+class Transition;
+class Player;
 
 #include "game_state.h"
 #include "player.h"
-
-class Transition;
-
 #include "transition.h"
 
 class MachineState {
-  std::vector<Transition> transitions;
+ private:
+  std::vector<std::shared_ptr<const Transition>> transitions;
 
-  auto get_available_transitions([[maybe_unused]] Player p, [[maybe_unused]] GameState g)
-    -> std::vector<Transition>;
+ public:
+  auto get_available_transitions([[maybe_unused]] Player p, [[maybe_unused]] const GameState& g) const
+    -> std::vector<std::shared_ptr<const Transition>>;
+
+  void set_transitions(std::vector<std::shared_ptr<const Transition>> transitions);
 };
 
 #endif
