@@ -29,6 +29,9 @@
 #include <utility>
 #include <vector>
 
+static auto prompt_for_int_choice(const std::string prompt,
+                                  std::vector<std::string> options) -> int;
+
 Engine::Engine(std::vector<std::shared_ptr<Transition>> transitions,
                std::vector<std::shared_ptr<MachineState>> states,
                std::vector<Player> players, std::shared_ptr<GameState> gs,
@@ -44,20 +47,37 @@ void Engine::run(void) {
   // TODO(brian) this should be multithreaded when there are multiple players
   Player &player = players[0];
   for (;;) {
+    // Retrieve the player's current state
     std::shared_ptr<const MachineState> state = player.get_state();
+
+    // Get the set of transitions available to the player
     std::vector<std::shared_ptr<const Transition>> transitions =
         state->get_available_transitions(player, *gs);
-    int i = 0;
+    std::vector<std::string> transition_names;
     for (const auto &t : transitions) {
-      std::cout << i++ << " | " << t->get_name() << "\n";
+      transition_names.push_back(t->get_name());
     }
-    std::cout << "Select a transition to take: ";
     int index;
-    std::cin >> index;
+    do {
+      index = prompt_for_int_choice("Select a transition to take: ",
+                                    transition_names);
+    } while (index < 0 || index > static_cast<int>(transitions.size() - 1));
 
-    std::shared_ptr x = transitions[index];
-    const Transition y = *x;
-    y.execute(gs, state);
-    player.update_state(y.get_target());
+    // Perform the transition
+    (*transitions[index])(gs, state);
+
+    // Move the player to the state after the transition
+    player.update_state(transitions[index]->get_target());
   }
+}
+
+static auto prompt_for_int_choice(const std::string prompt,
+                                  std::vector<std::string> options) -> int {
+  int x = 0;
+  for (const auto &opt : options) {
+    std::cout << x++ << " | " << opt << "\n";
+  }
+  std::cout << prompt;
+  std::cin >> x;
+  return x;
 }
