@@ -22,33 +22,39 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#ifndef INCLUDE_STANDARD_PLAYING_CARD_H_
+#define INCLUDE_STANDARD_PLAYING_CARD_H_
 
-#include <memory>
+#include <list>
+#include <string>
 #include <vector>
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "./playing_card.h"
 
-class Engine {
- private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
-
- public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
-
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
+enum class Suits {
+  HEARTS,
+  CLUBS,
+  DIAMONDS,
+  SPADES,
 };
 
-#endif  // INCLUDE_ENGINE_H_
+enum class Faces {
+  ACE,
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  JACK,
+  QUEEN,
+  KING,
+};
+
+using StandardPlayingCard = PlayingCard<Suits, Faces>;
+
+#endif  // INCLUDE_STANDARD_PLAYING_CARD_H_

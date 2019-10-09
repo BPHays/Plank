@@ -22,33 +22,32 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#include "include/transition.h"
 
 #include <memory>
+#include <string>
 #include <vector>
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "include/machine_state.h"
 
-class Engine {
- private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
+Transition::Transition(
+    std::string name, std::shared_ptr<const MachineState> target,
+    std::function<bool(std::shared_ptr<GameState>,
+                       std::shared_ptr<const MachineState>)>
+        execute,
+    std::vector<std::shared_ptr<MachineState>> dependant_epsilons)
+    : name(name), target(target), execute(execute),
+      dependant_epsilons(dependant_epsilons) {}
 
- public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
+auto Transition::get_name(void) const -> const std::string & { return name; }
 
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
-};
+auto Transition::get_target(void) const -> std::shared_ptr<const MachineState> {
+  return target;
+}
 
-#endif  // INCLUDE_ENGINE_H_
+// Calling a transition executes the code in the transition's execute
+// function that was provided by the user
+bool Transition::operator()(std::shared_ptr<GameState> gs,
+                            std::shared_ptr<const MachineState> ms) const {
+  return execute(gs, ms);
+}

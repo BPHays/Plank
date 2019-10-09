@@ -45,14 +45,22 @@ void Engine::run(void) {
   }
 
   // TODO(brian) this should be multithreaded when there are multiple players
-  Player &player = players[0];
-  for (;;) {
+  player_loop(std::make_unique<Player>(players[0]));
+  for (auto &player : players) {
+    // TODO actuall start all players and sync
+    (void) player;
+    //std::thread...
+  }
+}
+
+void Engine::player_loop(std::unique_ptr<Player> player) {
+   for (;;) {
     // Retrieve the player's current state
-    std::shared_ptr<const MachineState> state = player.get_state();
+    std::shared_ptr<const MachineState> state = player->get_state();
 
     // Get the set of transitions available to the player
     std::vector<std::shared_ptr<const Transition>> transitions =
-        state->get_available_transitions(player, *gs);
+        state->get_available_transitions(*player, *gs);
     std::vector<std::string> transition_names;
     for (const auto &t : transitions) {
       transition_names.push_back(t->get_name());
@@ -64,10 +72,10 @@ void Engine::run(void) {
     } while (index < 0 || index > static_cast<int>(transitions.size() - 1));
 
     // Perform the transition
-    (*transitions[index])(gs, state);
+    while(!(*transitions[index])(gs, state)){}
 
     // Move the player to the state after the transition
-    player.update_state(transitions[index]->get_target());
+    player->update_state(transitions[index]->get_target());
   }
 }
 

@@ -41,17 +41,17 @@ class Transition {
 
  public:
   Transition(std::string name, std::shared_ptr<const MachineState> target,
-             std::function<void(std::shared_ptr<GameState>,
+             std::function<bool(std::shared_ptr<GameState>,
                                 std::shared_ptr<const MachineState>)>
                  execute,
              std::vector<std::shared_ptr<MachineState>> dependant_epsilons);
   auto get_name(void) const -> const std::string &;
   auto get_target(void) const -> std::shared_ptr<const MachineState>;
 
-  std::function<void(std::shared_ptr<GameState>,
+  std::function<bool(std::shared_ptr<GameState>,
                      std::shared_ptr<const MachineState>)>
       execute;
-  void operator()(std::shared_ptr<GameState> gs,
+  bool operator()(std::shared_ptr<GameState> gs,
                   std::shared_ptr<const MachineState> ms) const;
 };
 

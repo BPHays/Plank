@@ -21,7 +21,7 @@ Machine {
 MachineState {
   List<Transition>
 }
-  
+
 Oracle: Player x GameState -> MachineState
 
 Transition: GameState x MachineState -> GameState x MachineState x List<Player>
@@ -32,3 +32,12 @@ GetValidTransitoins GameState x Player x MachiineState -> List<Transition>
 
 VictoryCheck GameState -> bool (added to a transition)
 ```
+
+Building Blocks
+* Cards
+* Dice
+  - Can be used to implement spinners etc
+
+Engine Architecture
+* Players run in the automaton's gameplay loop blocking waiting for transitions to fire
+* Network Dispatch loop listens for incoming connections from players to process requests

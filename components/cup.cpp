@@ -22,33 +22,41 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#include "include/components/cup.h"
 
-#include <memory>
-#include <vector>
+/**
+ * @brief Roll each of the die in the cup, updatig their cached values
+ *
+ * @tparam T Type representing the type on each face of the die
+ */
+template<typename T>
+void Cup::roll(void) {
+  std::for_each(dice.begin(), dice.end(), Die::roll);
+}
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+/**
+ * @brief return the cached values for the rolled dice as a vector
+ *
+ * @tparam T Type representing the type on each face of the die
+ *
+ * @return A vector representing the set of values rolled
+ */
+template<typename T>
+auto Cup::get_values(void) const -> std::vector<T> {
+    std::vector<T> values;
+    std::transform(dice.begin(), dice.end(), std::back_inserter(values), Die::get_cached_value);
+    return values;
+}
 
-class Engine {
- private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
-
- public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
-
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
-};
-
-#endif  // INCLUDE_ENGINE_H_
+/**
+ * @brief Roll a specific die in the cup again
+ *
+ * @tparam T The type of the face of each die
+ * @param idx The index in the dice vector to roll
+ *
+ * @return The value rolled
+ */
+template<typename T>
+auto Cup::roll_single(std::size_t idx) -> T {
+  return dice[i].roll();
+}

@@ -22,33 +22,30 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#ifndef INCLUDE_DECK_H_
+#define INCLUDE_DECK_H_
 
-#include <memory>
+#include <list>
+#include <string>
 #include <vector>
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "./card.h"
 
-class Engine {
+template<typename T>
+class Deck {
+  static_assert(std::is_base_of<Card, T>::value, "T must be derived from card");
+
  private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
+  std::list<T> pile;
+  std::list<T> discard_pile;
 
  public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
-
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
+  void shuffle(void);
+  auto draw_hand(int n) -> std::vector<T>;
+  auto draw(void) -> T;
+  void discard(T);
+  void reintroduce_discard_pile(void);
+  auto top(void) const -> const T&;
 };
 
-#endif  // INCLUDE_ENGINE_H_
+#endif  // INCLUDE_DECK_H_

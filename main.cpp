@@ -31,14 +31,16 @@
 #include "include/machine_state.h"
 #include "include/transition.h"
 
-void red(std::shared_ptr<GameState> gs,
+bool red(std::shared_ptr<GameState> gs,
          std::shared_ptr<const MachineState> ms) {
   std::cout << "red\n";
+  return true;
 }
 
-void blue(std::shared_ptr<GameState> gs,
+bool blue(std::shared_ptr<GameState> gs,
           std::shared_ptr<const MachineState> ms) {
   std::cout << "blue\n";
+  return true;
 }
 
 int main(void) {

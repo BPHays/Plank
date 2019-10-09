@@ -22,33 +22,26 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#ifndef INCLUDE_PLAYING_CARD_H_
+#define INCLUDE_PLAYING_CARD_H_
 
-#include <memory>
+#include <list>
+#include <string>
 #include <vector>
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "./card.h"
 
-class Engine {
+template<typename S, typename F>
+class PlayingCard : Card{
  private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
+  S suit;
+  F face;
 
  public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
+  PlayingCard(S suit, F face);
+  virtual auto to_string(void) const -> std::string = 0;
 
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
+  static auto genearate_deck(std::vector<S> suits, std::vector<F> faces) -> std::list<PlayingCard>;
 };
 
-#endif  // INCLUDE_ENGINE_H_
+#endif  // INCLUDE_PLAYING_CARD_H_

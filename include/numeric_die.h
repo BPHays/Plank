@@ -22,33 +22,15 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_ENGINE_H_
-#define INCLUDE_ENGINE_H_
+#ifndef INCLUDE_NUMERIC_DIE_H_
+#define INCLUDE_NUMERIC_DIE_H_
 
-#include <memory>
-#include <vector>
+#include "./die.h"
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
-
-class Engine {
- private:
-  std::vector<std::shared_ptr<Transition>> transitions;
-  std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
-  std::shared_ptr<GameState> gs;
-  std::shared_ptr<MachineState> start;
-
+template<int n>
+class NumericDie : Die<int, n> {
  public:
-  Engine(std::vector<std::shared_ptr<Transition>> transitions,
-         std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
-         std::shared_ptr<MachineState> start);
-
-  void run(void);
-  void player_loop(std::unique_ptr<Player> player);
+  NumericDie(void);
 };
 
-#endif  // INCLUDE_ENGINE_H_
+#endif  // INCLUDE_NUMErIC_DIE_H_
