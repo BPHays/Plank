@@ -41,3 +41,6 @@ Building Blocks
 Engine Architecture
 * Players run in the automaton's gameplay loop blocking waiting for transitions to fire
 * Network Dispatch loop listens for incoming connections from players to process requests
+
+![Alt text](docs/arch.png?raw=true "Arch")
+
