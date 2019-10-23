@@ -13,7 +13,7 @@ The Game specific code is implemented by buildling the game speicific automaton 
 ## Player interaction
 The interaction between a player and the game engine when they are in an active state and trying to commit the result of a transition.
 
-![Alt text](docs/modules.png?raw=true)
+![Alt text](modules.png?raw=true)
 
 ``` mermaid
 sequenceDiagram
