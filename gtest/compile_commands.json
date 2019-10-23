@@ -1,0 +1,68 @@
+[
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/main.cpp.o' -MF 'Plank@exe/main.cpp.o.d' -o 'Plank@exe/main.cpp.o' -c ../main.cpp",
+    "file": "../main.cpp",
+    "output": "Plank@exe/main.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/automaton_machine_state.cpp.o' -MF 'Plank@exe/automaton_machine_state.cpp.o.d' -o 'Plank@exe/automaton_machine_state.cpp.o' -c ../automaton/machine_state.cpp",
+    "file": "../automaton/machine_state.cpp",
+    "output": "Plank@exe/automaton_machine_state.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/automaton_transition.cpp.o' -MF 'Plank@exe/automaton_transition.cpp.o.d' -o 'Plank@exe/automaton_transition.cpp.o' -c ../automaton/transition.cpp",
+    "file": "../automaton/transition.cpp",
+    "output": "Plank@exe/automaton_transition.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/components_cup.cpp.o' -MF 'Plank@exe/components_cup.cpp.o.d' -o 'Plank@exe/components_cup.cpp.o' -c ../components/cup.cpp",
+    "file": "../components/cup.cpp",
+    "output": "Plank@exe/components_cup.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/components_deck.cpp.o' -MF 'Plank@exe/components_deck.cpp.o.d' -o 'Plank@exe/components_deck.cpp.o' -c ../components/deck.cpp",
+    "file": "../components/deck.cpp",
+    "output": "Plank@exe/components_deck.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/components_die.cpp.o' -MF 'Plank@exe/components_die.cpp.o.d' -o 'Plank@exe/components_die.cpp.o' -c ../components/die.cpp",
+    "file": "../components/die.cpp",
+    "output": "Plank@exe/components_die.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/components_numeric_die.cpp.o' -MF 'Plank@exe/components_numeric_die.cpp.o.d' -o 'Plank@exe/components_numeric_die.cpp.o' -c ../components/numeric_die.cpp",
+    "file": "../components/numeric_die.cpp",
+    "output": "Plank@exe/components_numeric_die.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/components_playing_card.cpp.o' -MF 'Plank@exe/components_playing_card.cpp.o.d' -o 'Plank@exe/components_playing_card.cpp.o' -c ../components/playing_card.cpp",
+    "file": "../components/playing_card.cpp",
+    "output": "Plank@exe/components_playing_card.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/engine_engine.cpp.o' -MF 'Plank@exe/engine_engine.cpp.o.d' -o 'Plank@exe/engine_engine.cpp.o' -c ../engine/engine.cpp",
+    "file": "../engine/engine.cpp",
+    "output": "Plank@exe/engine_engine.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -IPlank@exe -I. -I.. -I../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -MD -MQ 'Plank@exe/engine_player.cpp.o' -MF 'Plank@exe/engine_player.cpp.o.d' -o 'Plank@exe/engine_player.cpp.o' -c ../engine/player.cpp",
+    "file": "../engine/player.cpp",
+    "output": "Plank@exe/engine_player.cpp.o"
+  },
+  {
+    "directory": "/home/brian/projects/Plank/gtest",
+    "command": "c++ -ITest@exe -I. -I.. -I../include -I/usr/lib/pkgconfig/../../include -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wnon-virtual-dtor -Wextra -Wpedantic -std=c++2a -g -DGTEST_HAS_PTHREAD=1 -Wl,--start-group -lpthread -Wl,--end-group -MD -MQ 'Test@exe/tests_components_test.cpp.o' -MF 'Test@exe/tests_components_test.cpp.o.d' -o 'Test@exe/tests_components_test.cpp.o' -c ../tests/components/test.cpp",
+    "file": "../tests/components/test.cpp",
+    "output": "Test@exe/tests_components_test.cpp.o"
+  }
+]

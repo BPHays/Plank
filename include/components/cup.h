@@ -25,26 +25,78 @@
 #ifndef INCLUDE_COMPONENTS_CUP_H_
 #define INCLUDE_COMPONENTS_CUP_H_
 
-#include <memory>
 #include <vector>
 
-#include "./die.h"
+#include "components/die.h"
 
-/**
- * @brief Class representing a container of dice, with utilities for
- * aggregate rolling, checking, etc...
- *
- * @tparam T The type of the face of each die
- */
-template<typename T>
+template<typename T, int n, typename D = Die<T, n>>
 class Cup {
  private:
-   std::vector<std::unique_ptr<Die>> dice;
+   std::vector<D> dice;
 
  public:
-  void roll(void);
-  auto get_values(void) const -> std::vector<T>;
-  auto roll_single(std::size_t idx) -> T;
+   Cup(std::vector<D> dice): dice(dice) {}
+
+  /**
+   * @brief Roll each of the die in the cup, updatig their cached values
+   *
+   * @tparam T Type representing the type on each face of the die
+   */
+  void roll(void) {
+    std::for_each(dice.begin(), dice.end(), [](D die){die.roll();});
+  }
+
+  /**
+   * @brief return the cached values for the rolled dice as a vector
+   *
+   * @tparam T Type representing the type on each face of the die
+   *
+   * @return A vector representing the set of values rolled
+   */
+  auto get_values(void) const -> std::vector<T> {
+      std::vector<T> values;
+      std::for_each(dice.begin(), dice.end(), [&](D die){values.push_back(die.roll());});
+      return values;
+  }
+
+  /**
+   * @brief Roll a specific die in the cup again
+   *
+   * @tparam T The type of the face of each die
+   * @param idx The index in the dice vector to roll
+   *
+   * @return The value rolled
+   */
+  auto roll_single(std::size_t idx) -> T {
+    return dice[idx].roll();
+  }
+
+  /**
+   * @brief Add an additional die to the cup
+   *
+   * @param die The die to add
+   */
+  void add_die(Die<T, n> die) {
+    dice.push_back(die);
+  }
+
+  /**
+   * @brief Remove a die from the cup
+   *
+   * No real error handling right now
+   */
+  void remove_die(void) {
+    dice.pop_back();
+  }
+
+  /**
+   * @brief Get the number of dice in the cup
+   *
+   * @return The number of dice in the cup
+   */
+  auto count(void) -> int {
+    return dice.size();
+  }
 };
 
 #endif  // INCLUDE_COMPONENTS_CUP_H_

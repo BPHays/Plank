@@ -26,21 +26,46 @@
 #define INCLUDE_DIE_H_
 
 #include <array>
+#include <iostream>
 #include <optional>
+#include <random>
 
 template<typename T, int n>
 class Die {
  private:
+  /* The set of sides on the die each of type T */
   std::array<T, n> sides;
+  /* The vlaue shown by the last roll of the die */
   mutable std::optional<T> cached_value;
 
  public:
-  Die(std::array<T, n> sides);
-  auto roll(void) const -> T;
-  auto get_cached_value(void) const -> T;
+  /* Generate a die from the set of sides on the die */
+  Die(std::array<T, n> sides) : sides(sides), cached_value(std::nullopt) {}
+
+  /**
+   * @brief pick a side at random, and update the cache
+   *
+   * @return The value of the side that was chosen
+   */
+  auto roll(void) const -> T {
+    std::random_device rd;
+    std::mt19937 g(rd());
+    cached_value = std::make_optional(sides[g() % n]);
+    return *cached_value;
+  }
+
+  /**
+   * @brief Maintian the last rolled value on the die
+   * @return The last value rolled by the die
+   */
+  auto get_cached_value(void) const -> T {
+    return cached_value ? *cached_value : roll();
+  }
 
  private:
-  virtual auto to_string(void) const -> std::string = 0;
+  virtual auto to_string(void) const -> std::string {
+    return "";
+  }
 };
 
 #endif  // INCLUDE_DIE_H_

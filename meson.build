@@ -2,27 +2,23 @@ project('Plank', 'cpp',
   version : '0.1',
   default_options : ['warning_level=3', 'cpp_std=c++2a'])
 
-run_target('lint',
-  command : ['cpplint', '--recursive', '--exclude', 'build/*', '.'])
-
-run_target('format',
-  command : [
-    'clang-format',
-    '-i',
-    '--verbose',
-    'engine.cpp',
-    'transition.cpp',
-    'main.cpp',
-    'player.cpp',
-    'machine_state.cpp',
-    'include/engine.h',
-    'include/transition.h',
-    'include/player.h',
-    'include/machine_state.h'])
+incdir = include_directories('include')
 
 executable('Plank',
-           'engine.cpp',
-           'transition.cpp',
-           'main.cpp', 'player.cpp',
-           'machine_state.cpp',
+           'main.cpp',
+           'automaton/machine_state.cpp',
+           'automaton/transition.cpp',
+           'engine/engine.cpp',
+           'engine/player.cpp',
+           include_directories: incdir,
            install : true)
+
+gtest_dep = dependency('gtest', main: true, required: false)
+
+t = executable('ComponentsTest',
+               'tests/components/test_die.cpp',
+               'tests/components/test_cards.cpp',
+               dependencies: gtest_dep,
+               include_directories: incdir)
+
+test('gtest test', t)

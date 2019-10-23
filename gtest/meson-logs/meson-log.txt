@@ -1,0 +1,106 @@
+Build started at 2019-10-09T23:43:11.578803
+Main binary: /usr/bin/python
+Python system: Linux
+The Meson build system
+Version: 0.51.2
+Source dir: /home/brian/projects/Plank
+Build dir: /home/brian/projects/Plank/gtest
+Build type: native build
+Project name: Plank
+Project version: 0.1
+No CXXFLAGS in the environment, not changing global flags.
+No LDFLAGS in the environment, not changing global flags.
+No CPPFLAGS in the environment, not changing global flags.
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ -pipe -D_FILE_OFFSET_BITS=64 /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.cc -o /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.exe
+No CXXFLAGS in the environment, not changing global flags.
+No LDFLAGS in the environment, not changing global flags.
+No CPPFLAGS in the environment, not changing global flags.
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ -pipe -D_FILE_OFFSET_BITS=64 /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.cc -o /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/brian/projects/Plank/gtest/meson-private/sanitycheckcpp.exe
+C++ compiler for the host machine: c++ (gcc 9.1.0 "c++ (GCC) 9.1.0")
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Pkg-config binary for MachineChoice.HOST is not cached.
+Pkg-config binary missing from cross or native file, or env var undefined.
+Trying a default pkg-config fallback at pkg-config
+Trying pkg-config binary pkg-config for machine MachineChoice.HOST at ['/usr/bin/pkg-config']
+Found pkg-config: /usr/bin/pkg-config (1.6.3)
+Determining dependency 'gtest_main' with pkg-config executable '/usr/bin/pkg-config'
+PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
+Called `/usr/bin/pkg-config --modversion gtest_main` -> 0
+1.9.0
+PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
+Called `/usr/bin/pkg-config --cflags gtest_main` -> 0
+-I/usr/lib/pkgconfig/../../include -DGTEST_HAS_PTHREAD=1 -lpthread
+PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
+Called `/usr/bin/pkg-config gtest_main --libs` -> 0
+-L/usr/lib/pkgconfig/../../lib -lgtest_main -lgtest -lpthread
+PKG_CONFIG_PATH: /usr/local/lib/pkgconfig/
+Called `/usr/bin/pkg-config gtest_main --libs` -> 0
+-L/usr/lib/pkgconfig/../../lib -lgtest_main -lgtest -lpthread
+Running compile:
+Working directory:  /tmp/tmpj_en1ufv
+Command line:  c++ /tmp/tmpj_en1ufv/testfile.cpp -o /tmp/tmpj_en1ufv/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -fpermissive 
+
+Code:
+ #include<stdio.h>
+        
+        int main() {
+            printf("%ld\n", (long)(sizeof(void *)));
+            return 0;
+        };
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Program stdout:
+
+8
+
+Program stderr:
+
+
+Running compile:
+Working directory:  /tmp/tmpth448xgk
+Command line:  c++ /tmp/tmpth448xgk/testfile.cpp -o /tmp/tmpth448xgk/output.obj -pipe -c -D_FILE_OFFSET_BITS=64 -O0 -fpermissive --print-search-dirs 
+
+Code:
+ 
+Compiler stdout:
+ install: /usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/
+programs: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../x86_64-pc-linux-gnu/bin/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../x86_64-pc-linux-gnu/bin/
+libraries: =/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../x86_64-pc-linux-gnu/lib/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../x86_64-pc-linux-gnu/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../x86_64-pc-linux-gnu/9.1.0/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../lib/:/lib/x86_64-pc-linux-gnu/9.1.0/:/lib/../lib/:/usr/lib/x86_64-pc-linux-gnu/9.1.0/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../../x86_64-pc-linux-gnu/lib/:/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/../../../:/lib/:/usr/lib/
+
+Compiler stderr:
+ 
+Running compile:
+Working directory:  /tmp/tmpl85gc9mf
+Command line:  c++ /tmp/tmpl85gc9mf/testfile.cpp -o /tmp/tmpl85gc9mf/output.exe -pipe -D_FILE_OFFSET_BITS=64 -O0 -fpermissive -Wl,--start-group -lpthread -Wl,--end-group -Wl,--allow-shlib-undefined 
+
+Code:
+ int main() { return 0; }
+Compiler stdout:
+ 
+Compiler stderr:
+ 
+Run-time dependency GTest found: YES 1.9.0
+Adding test "gtest test"
+Build targets in project: 2
+Found ninja-1.9.0 at /usr/bin/ninja

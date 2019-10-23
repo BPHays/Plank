@@ -34,10 +34,17 @@
 class Player {
  private:
   /* Member variables */
+
+  // Display Name
   std::string name;
+
+  // Current Game State?
   std::shared_ptr<const MachineState> current_state;
 
   // TODO(brian) add network connection etc, here
+  // Netowork Information
+  // Hostname?
+  // Port?
 
  public:
   /* Constructors */
@@ -50,6 +57,11 @@ class Player {
 
   /* Non-const member functions */
   void update_state(std::shared_ptr<const MachineState> state);
+
+  //auto disconnect(void);
+  // TODO(brian) update with network info. This function should take the
+  // netowrk info for a reconnecting player
+  //auto reconnect(void);
 };
 
 #endif  // INCLUDE_PLAYER_H_

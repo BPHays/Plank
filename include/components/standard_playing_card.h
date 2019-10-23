@@ -29,8 +29,13 @@
 #include <string>
 #include <vector>
 
-#include "./playing_card.h"
+#include "components/playing_card.h"
 
+namespace Standard {
+
+/**
+ * @brief Standard playing card suits
+ */
 enum class Suits {
   HEARTS,
   CLUBS,
@@ -38,23 +43,37 @@ enum class Suits {
   SPADES,
 };
 
+/**
+ * @brief Standard playing card faces
+ */
 enum class Faces {
-  ACE,
-  ONE,
-  TWO,
-  THREE,
-  FOUR,
-  FIVE,
-  SIX,
-  SEVEN,
-  EIGHT,
-  NINE,
-  TEN,
-  JACK,
-  QUEEN,
-  KING,
+  ACE = 1,
+  TWO = 2,
+  THREE = 3,
+  FOUR = 4,
+  FIVE = 5,
+  SIX = 6,
+  SEVEN = 7,
+  EIGHT = 8,
+  NINE = 9,
+  TEN = 10,
+  JACK = 11,
+  QUEEN = 12,
+  KING = 13,
 };
 
-using StandardPlayingCard = PlayingCard<Suits, Faces>;
+}
+
+class StandardPlayingCard : public PlayingCard<Standard::Suits, Standard::Faces> {
+ public:
+  StandardPlayingCard(Standard::Suits suit, Standard::Faces face) : PlayingCard<Standard::Suits, Standard::Faces>(suit, face) {}
+
+  /*
+   * Get the integer value of the face of the card
+   */
+  inline constexpr auto get_face_value() const -> int {
+    return static_cast<int>(get_face());
+  }
+};
 
 #endif  // INCLUDE_STANDARD_PLAYING_CARD_H_

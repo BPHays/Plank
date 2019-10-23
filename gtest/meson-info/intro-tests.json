@@ -1,0 +1,1 @@
+[{"cmd": ["/home/brian/projects/Plank/gtest/Test"], "env": {}, "name": "gtest test", "workdir": null, "timeout": 30, "suite": ["Plank"], "is_parallel": true}]

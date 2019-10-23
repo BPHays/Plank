@@ -28,7 +28,6 @@
 #include <string>
 
 class Card {
-  virtual std::string to_string(void) const = 0;
 };
 
 #endif  // INCLUDE_CARD_H_

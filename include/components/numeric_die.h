@@ -25,12 +25,25 @@
 #ifndef INCLUDE_NUMERIC_DIE_H_
 #define INCLUDE_NUMERIC_DIE_H_
 
-#include "./die.h"
+#include <string>
+#include <utility>
+#include <array>
+#include <tuple>
+
+#include "components/die.h"
 
 template<int n>
-class NumericDie : Die<int, n> {
+class NumericDie : public Die<int, n> {
  public:
-  NumericDie(void);
+  NumericDie(void) : Die<int, n>(make_faces()) {}
+ private:
+  virtual auto to_string(void) const -> std::string {
+    return "";
+  }
+  constexpr static auto make_faces(void) -> std::array<int, n> {
+    std::array<int, n> a; std::iota(a.begin(), a.end(), 1);
+    return a;
+  }
 };
 
 #endif  // INCLUDE_NUMErIC_DIE_H_

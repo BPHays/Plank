@@ -1,0 +1,1 @@
+[{"name": "gtest_main", "compile_args": ["-I/usr/lib/pkgconfig/../../include", "-DGTEST_HAS_PTHREAD=1", "-lpthread"], "link_args": ["/usr/lib/pkgconfig/../../lib/libgtest_main.so", "/usr/lib/pkgconfig/../../lib/libgtest.so", "-lpthread"]}]
