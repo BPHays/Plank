@@ -1,0 +1,31 @@
+sequenceDiagram
+  participant c as client
+  participant e as engine
+  participant gs as game state
+  participant a as automaton
+
+  Note over c, a: Select transition to take
+  e->>a: Get available transitions
+  a-->>e: Available transitions
+  e->>c: Select Transition
+  c-->>e: Transition Select
+
+  Note over c, gs: Collect user input for transition
+  loop Prompt User
+    e->>gs: Query gamestate
+    gs-->>e: Gamestate response
+    e->>c: Prompt for input
+    c-->>e: Client response
+  end
+
+  Note over e, gs: Verify and commit transition changes
+  e->>gs: Query gamestate
+  gs-->>e: Gamestate response
+  Note over e: Lock Gamestate
+  alt bad state update
+    e->>c: Error response
+  end
+  e->>gs: Write new gamestate
+  Note over e: Unlock Gamestate
+
+  e->>c: Success response

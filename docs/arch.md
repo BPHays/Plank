@@ -15,52 +15,11 @@ The interaction between a player and the game engine when they are in an active 
 
 ![Alt text](modules.png?raw=true)
 
-``` mermaid
-sequenceDiagram
-  participant c as client
-  participant e as engine
-  participant gs as game state
-  participant a as automaton
-
-  Note over c, a: Select transition to take
-  e->>a: Get available transitions
-  a-->>e: Available transitions
-  e->>c: Select Transition
-  c-->>e: Transition Select
-
-  Note over c, gs: Collect user input for transition
-  loop Prompt User
-    e->>gs: Query gamestate
-    gs-->>e: Gamestate response
-    e->>c: Prompt for input
-    c-->>e: Client response
-  end
-
-  Note over e, gs: Verify and commit transition changes
-  e->>gs: Query gamestate
-  gs-->>e: Gamestate response
-  Note over e: Lock Gamestate
-  alt bad state update
-    e->>c: Error response
-  end
-  e->>gs: Write new gamestate
-  Note over e: Unlock Gamestate
-
-  e->>c: Success response
-```
+![Alt text](client_interaction.png?raw=true)
 
 ## Automatons
 The game automaton is divided into a few different types of nodes. When a player is at a node with one or more transitions they select a transition to activate and provide the input data through the prompt API. That data is run through the transition code and assuming that the transition prouces a valid new game state (as defined by the transition's own verification code) then the update is comitted and the user is moved to the next node in the automaton. There are also oracle nodes that instead of prompting the user on which transition to fire simply query the game state to determine the next node the user should be moved to. The last mechanism for traversing the automaton is a dependant transition where a player in some state will transition as a side effect of another transition firing. In general this last form is used when other players are waiting for some "active" player to make some move before moving on with the game.
 
 ### Example Automatons:
 
-``` mermaid
-stateDiagram
-  [*] --> Still
-  Still --> [*]
-
-  Still --> Moving
-  Moving --> Still
-  Moving --> Crash
-  Crash --> [*]
-```
+![Alt text](automaton_ex.png?raw=true)
