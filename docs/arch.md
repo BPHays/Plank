@@ -13,38 +13,7 @@ The Game specific code is implemented by buildling the game speicific automaton 
 ## Player interaction
 The interaction between a player and the game engine when they are in an active state and trying to commit the result of a transition.
 
-``` mermaid
-graph TD
-  subgraph game specific
-    Automaton
-    GameState
-  end
-  subgraph Plank lib
-    Automaton_lib
-    Components_lib
-    Prompt_lib
-  end
-  subgraph Plank core
-    Engine
-  end
-  subgraph players
-    client1
-    client2
-    ...
-    clientN
-  end
-    Engine -->|Transition Selection| Prompt_lib
-    Automaton -->|Transition Input| Prompt_lib
-    Engine -->|Fire Transitions| Automaton
-    Engine -->|Write GameState| GameState
-    GameState -->|Read GameState| Engine
-    GameState ---|import components | Components_lib
-    Automaton ---|import node templates| Automaton_lib
-    Prompt_lib --> client1
-    Prompt_lib --> client2
-    Prompt_lib --> ...
-    Prompt_lib --> clientN
-```
+![Alt text](docs/modules.svg?raw=true "Modules")
 
 ``` mermaid
 sequenceDiagram

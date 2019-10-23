@@ -22,42 +22,14 @@
  * SOFTWARE.
  */
 
-#ifndef INCLUDE_PLAYER_H_
-#define INCLUDE_PLAYER_H_
+#ifndef INCLUDE_ENGINE_PROMPT_H_
+#define INCLUDE_ENGINE_PROMPT_H_
 
-#include <memory>
-#include <optional>
 #include <string>
 
-#include "./machine_state.h"
+#include "engine/player.h"
 
-class Player {
- private:
-  /* Member variables */
+auto prompt_string(Player p, std::string prompt) -> std::string;
+auto prompt_integer(Player p, std::string prompt) -> int;
 
-  // Display Name
-  std::string name;
-
-  // Current Game State?
-  std::shared_ptr<const MachineState> current_state;
-
-  // TODO(brian) add network connection etc, here
-  std::string host;
-  std::string port;
-
- public:
-  /* Constructors */
-  explicit Player(std::string name, std::string host, std::string port);
-
-  /* Const member functions */
-  auto get_name(void) const -> const std::string &;
-  auto playing(void) const -> bool;
-  auto get_state(void) const -> std::shared_ptr<const MachineState>;
-  auto get_host(void) const -> const std::string &;
-  auto get_port(void) const -> const std::string &;
-
-  /* Non-const member functions */
-  void update_state(std::shared_ptr<const MachineState> state);
-};
-
-#endif  // INCLUDE_PLAYER_H_
+#endif  // INCLUDE_ENGINE_PROMPT_H_

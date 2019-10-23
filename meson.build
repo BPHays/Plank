@@ -4,16 +4,18 @@ project('Plank', 'cpp',
 
 incdir = include_directories('include')
 
+boost_dep = dependency('boost')
+gtest_dep = dependency('gtest', main: true, required: false)
+
 executable('Plank',
            'main.cpp',
            'automaton/machine_state.cpp',
            'automaton/transition.cpp',
            'engine/engine.cpp',
            'engine/player.cpp',
+           dependencies: boost_dep
            include_directories: incdir,
            install : true)
-
-gtest_dep = dependency('gtest', main: true, required: false)
 
 t = executable('ComponentsTest',
                'tests/components/test_die.cpp',
