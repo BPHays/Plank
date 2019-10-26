@@ -26,10 +26,10 @@
 #define INCLUDE_PLAYER_H_
 
 #include <memory>
-#include <optional>
 #include <string>
 
-#include "./machine_state.h"
+#include "automaton/machine_state.h"
+#include "engine/io.h"
 
 class Player {
  private:
@@ -38,16 +38,15 @@ class Player {
   // Display Name
   std::string name;
 
+  // The information needed to set up a connection to prompt the player
+  std::shared_ptr<IO> io_channel;
+
   // Current Game State?
   std::shared_ptr<const MachineState> current_state;
 
-  // TODO(brian) add network connection etc, here
-  std::string host;
-  std::string port;
-
  public:
   /* Constructors */
-  explicit Player(std::string name, std::string host, std::string port);
+  Player(std::string name, std::shared_ptr<IO> channel);
 
   /* Const member functions */
   auto get_name(void) const -> const std::string &;
@@ -55,6 +54,7 @@ class Player {
   auto get_state(void) const -> std::shared_ptr<const MachineState>;
   auto get_host(void) const -> const std::string &;
   auto get_port(void) const -> const std::string &;
+  auto prompt(std::string req) const -> std::optional<std::string>;
 
   /* Non-const member functions */
   void update_state(std::shared_ptr<const MachineState> state);

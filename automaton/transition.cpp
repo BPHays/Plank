@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-#include "include/transition.h"
+#include "automaton/transition.h"
 
 #include <memory>
 #include <string>
 #include <vector>
 
-#include "include/machine_state.h"
+#include "automaton/machine_state.h"
 
 Transition::Transition(
     std::string name, std::shared_ptr<const MachineState> target,
@@ -36,7 +36,7 @@ Transition::Transition(
                        std::shared_ptr<const MachineState>)>
         execute,
     std::vector<std::shared_ptr<MachineState>> dependant_epsilons)
-    : name(name), target(target), execute(execute),
+    : execute(execute), name(name), target(target),
       dependant_epsilons(dependant_epsilons) {}
 
 auto Transition::get_name(void) const -> const std::string & { return name; }

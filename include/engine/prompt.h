@@ -29,7 +29,7 @@
 
 #include "engine/player.h"
 
-auto prompt_string(Player p, std::string prompt) -> std::string;
-auto prompt_integer(Player p, std::string prompt) -> int;
+auto prompt_string(const Player & p, std::string prompt) -> std::string;
+auto prompt_integer(const Player & p, std::string prompt) -> int;
 
 #endif  // INCLUDE_ENGINE_PROMPT_H_

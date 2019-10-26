@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-#include "include/machine_state.h"
+#include "automaton/machine_state.h"
 
 #include <memory>
 #include <vector>
 
 auto MachineState::get_available_transitions(
-    [[maybe_unused]] Player p, [[maybe_unused]] const GameState &g) const
+    [[maybe_unused]] const std::unique_ptr<Player>& p, [[maybe_unused]] const GameState &g) const
     -> std::vector<std::shared_ptr<const Transition>> {
   return transitions;
 }

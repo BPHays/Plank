@@ -4,6 +4,7 @@ project('Plank', 'cpp',
 
 incdir = include_directories('include')
 
+threads_dep = dependency('threads')
 boost_dep = dependency('boost')
 gtest_dep = dependency('gtest', main: true, required: false)
 
@@ -11,9 +12,12 @@ executable('Plank',
            'main.cpp',
            'automaton/machine_state.cpp',
            'automaton/transition.cpp',
+           'engine/cli_io.cpp',
            'engine/engine.cpp',
+           'engine/net_io.cpp',
            'engine/player.cpp',
-           dependencies: boost_dep
+           'engine/prompt.cpp',
+           dependencies: [boost_dep, threads_dep],
            include_directories: incdir,
            install : true)
 

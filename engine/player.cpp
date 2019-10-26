@@ -25,9 +25,9 @@
 #include <memory>
 #include <string>
 
-#include "include/player.h"
+#include "engine/player.h"
 
-Player::Player(std::string name) : name(name), current_state(nullptr) {}
+Player::Player(std::string name, std::shared_ptr<IO> channel) : name(name), io_channel(std::move(channel)), current_state(nullptr) {}
 
 /* Getter for the player's name */
 auto Player::get_name(void) const -> const std::string & { return name; }
@@ -44,3 +44,16 @@ void Player::update_state(std::shared_ptr<const MachineState> state) {
 
 /* True if the player is in some game state */
 auto Player::playing(void) const -> bool { return current_state != nullptr; }
+
+
+/**
+ * @brief Connect to the player over the players io channel and prompt them for
+ * the requested information
+ *
+ * @param req the request message
+ *
+ * @return the player's response
+ */
+auto Player::prompt(std::string req) const -> std::optional<std::string> {
+  return io_channel->prompt(req);
+}

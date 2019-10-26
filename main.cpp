@@ -27,40 +27,41 @@
 #include <utility>
 #include <vector>
 
-#include "include/engine.h"
-#include "include/machine_state.h"
-#include "include/transition.h"
+#include "engine/engine.h"
+#include "automaton/machine_state.h"
+#include "automaton/transition.h"
 
-bool red(std::shared_ptr<GameState> gs,
-         std::shared_ptr<const MachineState> ms) {
-  std::cout << "red\n";
-  return true;
-}
-
-bool blue(std::shared_ptr<GameState> gs,
-          std::shared_ptr<const MachineState> ms) {
-  std::cout << "blue\n";
-  return true;
-}
+//bool red(std::shared_ptr<GameState> gs,
+//         std::shared_ptr<const MachineState> ms) {
+//  std::cout << "red\n";
+//  return true;
+//}
+//
+//bool blue(std::shared_ptr<GameState> gs,
+//          std::shared_ptr<const MachineState> ms) {
+//  std::cout << "blue\n";
+//  return true;
+//}
 
 int main(void) {
-  MachineState ms;
-  std::shared_ptr<MachineState> the_state = std::make_shared<MachineState>(ms);
-
-  std::vector<std::shared_ptr<Transition>> transitions;
-  Transition t("red", the_state, red, {});
-  transitions.push_back(std::make_shared<Transition>(t));
-  Transition t2("blue", the_state, blue, {});
-  transitions.push_back(std::make_shared<Transition>(t2));
-
-  std::vector<std::shared_ptr<const Transition>> ts;
-  for (const auto &t : transitions) {
-    ts.push_back(t);
-  }
-  the_state->set_transitions(ts);
-
-  std::vector<Player> players = {Player{"Brian"}};
-
-  Engine eng(transitions, {the_state}, players, {}, the_state);
-  eng.run();
+  return 0;
+//  MachineState ms;
+//  std::shared_ptr<MachineState> the_state = std::make_shared<MachineState>(ms);
+//
+//  std::vector<std::shared_ptr<Transition>> transitions;
+//  Transition t("red", the_state, red, {});
+//  transitions.push_back(std::make_shared<Transition>(t));
+//  Transition t2("blue", the_state, blue, {});
+//  transitions.push_back(std::make_shared<Transition>(t2));
+//
+//  std::vector<std::shared_ptr<const Transition>> ts;
+//  for (const auto &t : transitions) {
+//    ts.push_back(t);
+//  }
+//  the_state->set_transitions(ts);
+//
+//  std::vector<Player> players = {Player{"Brian"}};
+//
+//  Engine eng(transitions, {the_state}, players, {}, the_state);
+//  eng.run();
 }

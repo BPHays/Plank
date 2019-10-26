@@ -34,6 +34,11 @@
 #include "./machine_state.h"
 
 class Transition {
+ public:
+  std::function<bool(std::shared_ptr<GameState>,
+                     std::shared_ptr<const MachineState>)>
+      execute;
+
  private:
   std::string name;
   std::shared_ptr<const MachineState> target;
@@ -48,9 +53,6 @@ class Transition {
   auto get_name(void) const -> const std::string &;
   auto get_target(void) const -> std::shared_ptr<const MachineState>;
 
-  std::function<bool(std::shared_ptr<GameState>,
-                     std::shared_ptr<const MachineState>)>
-      execute;
   bool operator()(std::shared_ptr<GameState> gs,
                   std::shared_ptr<const MachineState> ms) const;
 };

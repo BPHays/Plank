@@ -28,23 +28,23 @@
 #include <memory>
 #include <vector>
 
-#include "./game_state.h"
-#include "./machine_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "automaton/machine_state.h"
+#include "automaton/transition.h"
+#include "components/game_state.h"
+#include "engine/player.h"
 
 class Engine {
  private:
   std::vector<std::shared_ptr<Transition>> transitions;
   std::vector<std::shared_ptr<MachineState>> states;
-  std::vector<Player> players;
   std::shared_ptr<GameState> gs;
   std::shared_ptr<MachineState> start;
+  std::vector<Player> players;
 
  public:
   Engine(std::vector<std::shared_ptr<Transition>> transitions,
          std::vector<std::shared_ptr<MachineState>> states,
-         std::vector<Player> players, std::shared_ptr<GameState> gs,
+         std::shared_ptr<GameState> gs,
          std::shared_ptr<MachineState> start);
 
   void run(void);

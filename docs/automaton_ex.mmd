@@ -1,8 +1,13 @@
 stateDiagram
-  [*] --> Still
-  Still --> [*]
+  current_player: oracle
+  make_move: transition
 
-  Still --> Moving
-  Moving --> Still
-  Moving --> Crash
-  Crash --> [*]
+  [*] --> current_player
+  current_player --> active_player
+  current_player --> passive_player
+  active_player --> make_move
+  make_move --> current_player
+  passive_player --> current_player
+  passive_player --> make_move: Dependant
+  make_move --> [*]
+  passive_player --> [*]

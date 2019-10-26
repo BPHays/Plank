@@ -1,0 +1,25 @@
+stateDiagram
+  current_player: oracle
+  build_play: transition
+  trade: transition
+  accept_reject: transition
+
+  [*] --> current_player
+  current_player --> active_player
+  current_player --> passive_player
+
+  active_player --> build_play
+  build_play --> active_player
+  active_player --> trade
+  trade --> deal_active
+  deal_active --> active_player
+  active_player --> end_turn
+  end_turn --> current_player
+  deal_active --> accept_reject: Dependant
+
+  passive_player --> trade: Dependant
+  passive_player --> end_turn: Dependant
+  passive_player --> deal_passive
+  deal_passive --> accept_reject
+  accept_reject --> passive_player
+  passive_player --> current_player

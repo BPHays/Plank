@@ -22,22 +22,19 @@
  * SOFTWARE.
  */
 
-#include "include/engine.h"
+#include "engine/engine.h"
 
 #include <iostream>
 #include <memory>
 #include <utility>
 #include <vector>
 
-static auto prompt_for_int_choice(const std::string prompt,
-                                  std::vector<std::string> options) -> int;
-
 Engine::Engine(std::vector<std::shared_ptr<Transition>> transitions,
                std::vector<std::shared_ptr<MachineState>> states,
-               std::vector<Player> players, std::shared_ptr<GameState> gs,
+               std::shared_ptr<GameState> gs,
                std::shared_ptr<MachineState> start)
-    : transitions(transitions), states(states), players(players),
-      gs(std::move(gs)), start(start) {}
+    : transitions(transitions), states(states),
+      gs(gs), start(start) {}
 
 void Engine::run(void) {
   for (auto &player : players) {
@@ -46,46 +43,37 @@ void Engine::run(void) {
 
   // TODO(brian) this should be multithreaded when there are multiple players
   player_loop(std::make_unique<Player>(players[0]));
+  /*
   for (auto &player : players) {
     // TODO actuall start all players and sync
     (void) player;
     //std::thread...
   }
+  */
 }
 
 void Engine::player_loop(std::unique_ptr<Player> player) {
-   for (;;) {
-    // Retrieve the player's current state
-    std::shared_ptr<const MachineState> state = player->get_state();
+  for (;;) {
+   // Retrieve the player's current state
+   std::shared_ptr<const MachineState> state = player->get_state();
 
-    // Get the set of transitions available to the player
-    std::vector<std::shared_ptr<const Transition>> transitions =
-        state->get_available_transitions(*player, *gs);
-    std::vector<std::string> transition_names;
-    for (const auto &t : transitions) {
-      transition_names.push_back(t->get_name());
-    }
-    int index;
-    do {
-      index = prompt_for_int_choice("Select a transition to take: ",
-                                    transition_names);
-    } while (index < 0 || index > static_cast<int>(transitions.size() - 1));
+   // Get the set of transitions available to the player
+   std::vector<std::shared_ptr<const Transition>> transitions =
+       state->get_available_transitions(player, *gs);
+   std::vector<std::string> transition_names;
+   for (const auto &t : transitions) {
+     transition_names.push_back(t->get_name());
+   }
+   int index;
+   do {
+     //index = prompt_for_int_choice("Select a transition to take: ",
+     //                             transition_names);
+   } while (index < 0 || index > static_cast<int>(transitions.size() - 1));
 
-    // Perform the transition
-    while(!(*transitions[index])(gs, state)){}
+   // Perform the transition
+   while(!(*transitions[index])(gs, state)){}
 
-    // Move the player to the state after the transition
-    player->update_state(transitions[index]->get_target());
+   // Move the player to the state after the transition
+   player->update_state(transitions[index]->get_target());
   }
-}
-
-static auto prompt_for_int_choice(const std::string prompt,
-                                  std::vector<std::string> options) -> int {
-  int x = 0;
-  for (const auto &opt : options) {
-    std::cout << x++ << " | " << opt << "\n";
-  }
-  std::cout << prompt;
-  std::cin >> x;
-  return x;
 }

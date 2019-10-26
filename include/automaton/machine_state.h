@@ -32,16 +32,16 @@ class MachineState;
 class Transition;
 class Player;
 
-#include "./game_state.h"
-#include "./player.h"
-#include "./transition.h"
+#include "components/game_state.h"
+#include "engine/player.h"
+#include "automaton/transition.h"
 
 class MachineState {
  private:
   std::vector<std::shared_ptr<const Transition>> transitions;
 
  public:
-  auto get_available_transitions([[maybe_unused]] Player p,
+  auto get_available_transitions([[maybe_unused]] const std::unique_ptr<Player>& p,
                                  [[maybe_unused]] const GameState &g) const
       -> std::vector<std::shared_ptr<const Transition>>;
 
